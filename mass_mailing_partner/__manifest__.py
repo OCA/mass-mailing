@@ -6,9 +6,9 @@
 
 {
     "name": "Link partners with mass-mailing",
-    "version": "17.0.1.0.0",
+    "version": "18.0.1.0.0",
     "author": "Tecnativa, " "Odoo Community Association (OCA)",
-    "website": "https://github.com/OCA/social",
+    "website": "https://github.com/OCA/mass-mailing",
     "license": "AGPL-3",
     "category": "Marketing",
     "depends": ["mass_mailing"],
