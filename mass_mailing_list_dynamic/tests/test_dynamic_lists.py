@@ -5,11 +5,13 @@
 from unittest.mock import patch
 
 from odoo.exceptions import ValidationError
-from odoo.tests import common, tagged
+from odoo.tests import tagged
+
+from odoo.addons.base.tests.common import BaseCommon
 
 
 @tagged("post_install", "-at_install")
-class DynamicListCase(common.TransactionCase):
+class DynamicListCase(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -49,7 +51,10 @@ class DynamicListCase(common.TransactionCase):
         self.list.dynamic = False
         # Create contact for partner 0 in unsynced list
         contact0 = Contact.create(
-            {"list_ids": [(4, self.list.id)], "partner_id": self.partners[0].id}
+            {
+                "list_ids": [(4, self.list.id)],
+                "partner_id": self.partners[0].id,
+            }
         )
         self.list.flush_recordset()
         self.assertEqual(self.list.contact_count, 1)
@@ -74,7 +79,10 @@ class DynamicListCase(common.TransactionCase):
         # Cannot add or edit contacts in fully synced lists
         with self.assertRaises(ValidationError):
             Contact.create(
-                {"list_ids": [(4, self.list.id)], "partner_id": self.partners[0].id}
+                {
+                    "list_ids": [(4, self.list.id)],
+                    "partner_id": self.partners[0].id,
+                }
             )
         contact1 = Contact.search([("list_ids", "in", self.list.ids)], limit=1)
         with self.assertRaises(ValidationError):
@@ -113,7 +121,11 @@ class DynamicListCase(common.TransactionCase):
     def test_load_filter(self):
         domain = "[('id', '=', 1)]"
         ir_filter = self.env["ir.filters"].create(
-            {"name": "Test filter", "model_id": "res.partner", "domain": domain}
+            {
+                "name": "Test filter",
+                "model_id": "res.partner",
+                "domain": domain,
+            }
         )
         wizard = (
             self.env["mailing.load.filter"]

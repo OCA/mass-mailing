@@ -50,12 +50,12 @@ To create a dynamic mailing list, you need to:
 4. Check the *Dynamic* box.
 5. Choose a *Sync method*:
 
-   -  Leave empty to use as a manual mailing list, the normal behavior.
-   -  *Only add new records* to make sure no records disappear from the
-      list when partners stop matching the *Synchronization critera*.
-   -  *Add and remove records as needed* to make the list be fully
-      synchronized with the *Synchronization critera*, even if that
-      means removing contacts from it.
+   - Leave empty to use as a manual mailing list, the normal behavior.
+   - *Only add new records* to make sure no records disappear from the
+     list when partners stop matching the *Synchronization critera*.
+   - *Add and remove records as needed* to make the list be fully
+     synchronized with the *Synchronization critera*, even if that means
+     removing contacts from it.
 
 6. Define a *Synchronization criteria* that will be used to match the
    partners that should go into the list as contacts. Only partners with
@@ -107,30 +107,34 @@ Authors
 Contributors
 ------------
 
--  `Tecnativa <https://www.tecnativa.com>`__:
+- `Tecnativa <https://www.tecnativa.com>`__:
 
-   -  Jairo Llopis
-   -  Pedro M. Baeza
-   -  David Vidal
-   -  Victor M.M. Torres
-   -  Víctor Martínez
+  - Jairo Llopis
+  - Pedro M. Baeza
+  - David Vidal
+  - Victor M.M. Torres
+  - Víctor Martínez
 
--  `Hibou Corp. <https://hibou.io>`__:
+- `Hibou Corp. <https://hibou.io>`__:
 
-   -  Jared Kipe <jared@hibou.io>
+  - Jared Kipe <jared@hibou.io>
 
--  `Dynapps N.V. <https://www.dynapps.be>`__:
+- `Dynapps N.V. <https://www.dynapps.be>`__:
 
-   -  Xander De Jaegere
+  - Xander De Jaegere
 
--  `Trobz <https://trobz.com>`__:
+- `Trobz <https://trobz.com>`__:
 
-      -  Nguyễn Minh Chiến <chien@trobz.com>
+     - Nguyễn Minh Chiến <chien@trobz.com>
+
+- `PeGon GmbH <https://www.pegon.ch>`__:
+
+  - Pedro Evaristo Gonzalez Sanchez
 
 Other credits
 -------------
 
-The migration of this module from 15.0 to 16.0 was financially supported
+The migration of this module from 15.0 to 17.0 was financially supported
 by Camptocamp
 
 Maintainers
