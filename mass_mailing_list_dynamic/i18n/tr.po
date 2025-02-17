@@ -35,7 +35,7 @@ msgstr ""
 #. module: mass_mailing_list_dynamic
 #: model_terms:ir.ui.view,arch_db:mass_mailing_list_dynamic.mailing_list_view_form
 msgid ""
-"<span attrs=\"{'invisible': [('is_synced', '=', True)]}\">\n"
+"<span invisible=\"is_synced\">\n"
 "                    <strong>???</strong>\n"
 "                </span>"
 msgstr ""
@@ -121,11 +121,6 @@ msgid "Is Synced"
 msgstr ""
 
 #. module: mass_mailing_list_dynamic
-#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mailing_load_filter____last_update
-msgid "Last Modified on"
-msgstr "Son değişiklik"
-
-#. module: mass_mailing_list_dynamic
 #: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mailing_load_filter__write_uid
 msgid "Last Updated by"
 msgstr "Son güncelleyen"
@@ -193,3 +188,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mailing_list__sync_domain
 msgid "Synchronization critera"
 msgstr ""
+
+#~ msgid "Last Modified on"
+#~ msgstr "Son değişiklik"

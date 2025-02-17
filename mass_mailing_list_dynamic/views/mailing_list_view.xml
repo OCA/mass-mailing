@@ -14,7 +14,7 @@
                         <field name="dynamic" />
                         <field name="is_synced" invisible="1" />
                     </group>
-                    <group attrs="{'invisible': [('dynamic', '=', False)]}">
+                    <group invisible="not dynamic">
                         <label for="sync_method" />
                         <div>
                             <field name="sync_method" />
@@ -24,18 +24,18 @@
                                 string="Sync now"
                                 icon="fa-exclamation-triangle"
                                 class="btn-danger"
-                                attrs="{'invisible': [('is_synced', '=', True)]}"
+                                invisible="is_synced"
                             />
                             <button
                                 name="action_sync"
                                 type="object"
                                 string="Sync now"
                                 icon="fa-refresh"
-                                attrs="{'invisible': [('is_synced', '=', False)]}"
+                                invisible="not is_synced"
                             />
                         </div>
                     </group>
-                    <div attrs="{'invisible': [('dynamic', '=', False)]}">
+                    <div invisible="not dynamic">
                         <div class="alert alert-info" role="alert">
                             <i
                                 class="fa fa-info-circle"
@@ -48,7 +48,7 @@
                             /> You cannot make manual editions of contacts in fully synchronized lists.
                         </div>
                     </div>
-                    <group colspan="4" attrs="{'invisible': [('dynamic', '=', False)]}">
+                    <group colspan="4" invisible="not dynamic">
                         <field
                             name="sync_domain"
                             widget="domain"
@@ -65,12 +65,10 @@
                 </group>
             </xpath>
             <field name="contact_count" position="attributes">
-                <attribute name="attrs">
-                    {'invisible': [('is_synced', '=', False)]}
-                </attribute>
+                <attribute name="invisible">not is_synced</attribute>
             </field>
             <field name="contact_count" position="after">
-                <span attrs="{'invisible': [('is_synced', '=', True)]}">
+                <span invisible="is_synced">
                     <strong>???</strong>
                 </span>
             </field>
