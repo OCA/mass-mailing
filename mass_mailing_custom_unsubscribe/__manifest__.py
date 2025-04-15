@@ -14,7 +14,7 @@
         "views/mail_subscription_view.xml",
     ],
     "author": "Tecnativa, Odoo Community Association (OCA)",
-    "website": "https://github.com/OCA/social",
+    "website": "https://github.com/OCA/mass-mailing",
     "license": "AGPL-3",
     "assets": {
         "web.assets_tests": [
