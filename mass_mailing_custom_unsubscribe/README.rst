@@ -80,6 +80,7 @@ Contributors
   - Pedro M. Baeza
   - Carlos Roca
   - Pilar Vargas
+  - Carlos Lopez
 
 Maintainers
 -----------
