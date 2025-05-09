@@ -3,7 +3,7 @@
 # Copyright 2020 Hibou Corp. - Jared Kipe
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, models
+from odoo import api, models
 from odoo.exceptions import ValidationError
 
 
@@ -19,7 +19,7 @@ class MassMailingContact(models.Model):
         )
         if full_synced_lists:
             raise ValidationError(
-                _(
+                self.env._(
                     "Cannot edit manually contacts in a fully "
                     "synchronized list. Change its sync method or execute "
                     "a manual sync instead."
