@@ -2,7 +2,6 @@
 <!-- Copyright 2017 Tecnativa - Pedro M. Baea
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record id="view_mailing_load_filter_form" model="ir.ui.view">
         <field name="model">mailing.load.filter</field>
         <field name="arch" type="xml">
