@@ -69,5 +69,6 @@ class MassMailingList(models.Model):
 
     @api.onchange("dynamic", "sync_method", "sync_domain")
     def _onchange_dynamic(self):
-        if self.dynamic:
-            self.is_synced = False
+        for rec in self:
+            if rec.dynamic:
+                rec.is_synced = False
