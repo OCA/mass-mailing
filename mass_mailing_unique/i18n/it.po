@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-01-04 03:40+0000\n"
-"PO-Revision-Date: 2023-12-19 16:34+0000\n"
+"PO-Revision-Date: 2025-05-24 13:53+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: mass_mailing_unique
 #: model:ir.model.constraint,message:mass_mailing_unique.constraint_mailing_list_unique_name
@@ -40,6 +40,8 @@ msgid ""
 "There's already an existing mailing contact with this email address. \n"
 "Delete that existing record or change its email field value."
 msgstr ""
+"Esiste già un contatto di posta con questo indirizzo e-mail. \n"
+"Eliminare il record esistente o modificare il valore del campo email."
 
 #. module: mass_mailing_unique
 #. odoo-python
