@@ -1,8 +1,9 @@
 [project]
 name = "odoo-addons-oca-mass-mailing"
-version = "18.0.20250416.0"
+version = "18.0.20250611.0"
 dependencies = [
     "odoo-addon-mass_mailing_custom_unsubscribe==18.0.*",
+    "odoo-addon-mass_mailing_partner==18.0.*",
 ]
 classifiers=[
     "Programming Language :: Python",
