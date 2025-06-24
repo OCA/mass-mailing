@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,8 +18,8 @@ msgstr ""
 msgid ""
 "<i class=\"fa fa-info-circle\"/> New sending will be done only to not "
 "sent/new recipients. If you want to resend again the mass mailing to already"
-" sent recipients, click on <b>Sent</b> smart-button for removing the "
-"existing record(s)."
+" sent recipients, click <b>below</b> on Sent or on Cancelled emails and "
+"remove the existing records."
 msgstr ""
 
 #. module: mass_mailing_resend
@@ -35,6 +35,5 @@ msgstr ""
 #. module: mass_mailing_resend
 #. odoo-python
 #: code:addons/mass_mailing_resend/models/mailing_mailing.py:0
-#, python-format
 msgid "You can't resend a mass mailing that is being sent or in draft state."
 msgstr ""

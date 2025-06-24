@@ -2,11 +2,14 @@
 # Copyright 2022 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import exceptions
-from odoo.tests import common
+from odoo import Command, exceptions
+from odoo.tests import tagged
+
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestMassMailingResend(common.TransactionCase):
+@tagged("post_install", "-at_install")
+class DynamicListCase(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -15,14 +18,14 @@ class TestMassMailingResend(common.TransactionCase):
             {
                 "name": "Contact 1",
                 "email": "email1@test.com",
-                "list_ids": [[6, 0, [cls.list.id]]],
+                "list_ids": [Command.set([cls.list.id])],
             }
         )
         cls.contact2 = cls.env["mailing.contact"].create(
             {
                 "name": "Contact 2",
                 "email": "email2@test.com",
-                "list_ids": [[6, 0, [cls.list.id]]],
+                "list_ids": [Command.set([cls.list.id])],
             }
         )
         cls.mass_mailing = cls.env["mailing.mailing"].create(
@@ -30,7 +33,7 @@ class TestMassMailingResend(common.TransactionCase):
                 "name": "Test mass mailing",
                 "email_from": "test@example.org",
                 "mailing_model_id": cls.env.ref("mass_mailing.model_mailing_list").id,
-                "contact_list_ids": [(6, 0, cls.list.ids)],
+                "contact_list_ids": [Command.set(cls.list.ids)],
                 "subject": "Mailing test",
             }
         )
