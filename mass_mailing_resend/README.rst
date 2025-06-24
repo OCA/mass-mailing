@@ -90,6 +90,7 @@ Contributors
 
   - Pedro M. Baeza
   - Ernesto Tejeda
+  - David Bañón
 
 - `Trobz <https://trobz.com>`__:
 
