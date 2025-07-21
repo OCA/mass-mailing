@@ -22,6 +22,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [mass_mailing_custom_unsubscribe](mass_mailing_custom_unsubscribe/) | 18.0.1.0.0 |  | Track metadata for GDPR compliance
+[mass_mailing_list_dynamic](mass_mailing_list_dynamic/) | 18.0.1.0.0 |  | Mass mailing lists that get autopopulated
 [mass_mailing_partner](mass_mailing_partner/) | 18.0.1.0.0 |  | Link partners with mass-mailing
 
 [//]: # (end addons)
