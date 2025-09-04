@@ -6,7 +6,7 @@
 {
     "name": "Unique records for mass mailing",
     "summary": "Avoids duplicate mailing lists and contacts",
-    "version": "16.0.1.1.0",
+    "version": "18.0.1.0.0",
     "category": "Marketing",
     "website": "https://github.com/OCA/mass-mailing",
     "author": "Tecnativa, Odoo Community Association (OCA)",
