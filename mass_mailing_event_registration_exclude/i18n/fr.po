@@ -97,9 +97,3 @@ msgstr "Publipostage"
 #: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration_state__name
 msgid "Name"
 msgstr "Nom"
-
-#~ msgid "Mass Mailing Contact"
-#~ msgstr "Contact de la liste de diffusion"
-
-#~ msgid "Partner"
-#~ msgstr "Partenaire"

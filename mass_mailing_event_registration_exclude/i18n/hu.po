@@ -97,6 +97,3 @@ msgstr ""
 #: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration_state__name
 msgid "Name"
 msgstr "Név"
-
-#~ msgid "Partner"
-#~ msgstr "Partner"

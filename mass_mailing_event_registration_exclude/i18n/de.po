@@ -97,9 +97,3 @@ msgstr "Massenmailing"
 #: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration_state__name
 msgid "Name"
 msgstr "Bezeichnung"
-
-#~ msgid "Mass Mailing Contact"
-#~ msgstr "Massenmail-Kontakt"
-
-#~ msgid "Partner"
-#~ msgstr "Partner"

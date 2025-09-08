@@ -98,9 +98,3 @@ msgstr "Masovno razpošiljanje"
 #: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration_state__name
 msgid "Name"
 msgstr "Naziv"
-
-#~ msgid "Mass Mailing Contact"
-#~ msgstr "Stik masovne pošte"
-
-#~ msgid "Partner"
-#~ msgstr "Partner"

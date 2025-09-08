@@ -3,13 +3,14 @@
 # Copyright 2020 Tecnativa - Alexandre D. Díaz
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import TransactionCase
+from odoo import Command
+from odoo.tests import tagged
+
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestMassMailingEventRegistrationExclude(TransactionCase):
-    at_install = False
-    post_install = True
-
+@tagged("post_install", "-at_install")
+class TestMassMailingEventRegistrationExclude(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -30,14 +31,14 @@ class TestMassMailingEventRegistrationExclude(TransactionCase):
         cls.contact_list = cls.env["mailing.list"].create({"name": "Test list"})
         cls.contact_a = cls.env["mailing.contact"].create(
             {
-                "list_ids": [(4, cls.contact_list.id, False)],
+                "list_ids": [Command.link(cls.contact_list.id)],
                 "name": "Test contact A",
                 "email": "partner_a@example.org",
             }
         )
         cls.contact_b = cls.env["mailing.contact"].create(
             {
-                "list_ids": [(4, cls.contact_list.id, False)],
+                "list_ids": [Command.link(cls.contact_list.id)],
                 "name": "Test contact B",
                 "email": "partner_b@example.org",
             }
@@ -61,7 +62,7 @@ class TestMassMailingEventRegistrationExclude(TransactionCase):
                         "mass_mailing.model_mailing_contact"
                     ).id,
                     "mailing_domain": str(domain),
-                    "contact_list_ids": [(6, 0, [self.contact_list.id])],
+                    "contact_list_ids": [Command.set([self.contact_list.id])],
                     "body_html": "<p>Test email body</p>",
                     "reply_to_mode": "new",
                     "subject": "Test email subject",
@@ -80,14 +81,14 @@ class TestMassMailingEventRegistrationExclude(TransactionCase):
         mass_mailing.write(
             {
                 "event_id": self.event.id,
-                "exclude_event_state_ids": [(6, 0, self.states_all.ids)],
+                "exclude_event_state_ids": [Command.set(self.states_all.ids)],
             }
         )
         self.assertEqual([self.contact_b.id], mass_mailing._get_recipients())
         self.assertEqual(1, mail_contact.search_count(domain))
         self.registration.state = "draft"
         mass_mailing.write(
-            {"exclude_event_state_ids": [(6, 0, self.state_confirmed.ids)]}
+            {"exclude_event_state_ids": [Command.set(self.state_confirmed.ids)]}
         )
         self.assertEqual(
             [self.contact_a.id, self.contact_b.id], mass_mailing._get_recipients()
@@ -125,7 +126,7 @@ class TestMassMailingEventRegistrationExclude(TransactionCase):
         mass_mailing.write(
             {
                 "event_id": self.event.id,
-                "exclude_event_state_ids": [(6, 0, self.states_all.ids)],
+                "exclude_event_state_ids": [Command.set(self.states_all.ids)],
             }
         )
         self.assertEqual([self.partner_b.id], mass_mailing._get_recipients())
@@ -133,7 +134,7 @@ class TestMassMailingEventRegistrationExclude(TransactionCase):
         self.assertEqual(0, mail_registration.search_count(domain_reg))
         self.registration.state = "draft"
         mass_mailing.write(
-            {"exclude_event_state_ids": [(6, 0, self.state_confirmed.ids)]}
+            {"exclude_event_state_ids": [Command.set(self.state_confirmed.ids)]}
         )
         self.assertEqual(
             [self.partner_a.id, self.partner_b.id], mass_mailing._get_recipients()

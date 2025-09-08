@@ -99,12 +99,3 @@ msgstr "Envío masivo"
 #: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration_state__name
 msgid "Name"
 msgstr "Nombre"
-
-#~ msgid "Mass Mailing Contact"
-#~ msgstr "Contacto de envío masivo"
-
-#~ msgid "Attendee"
-#~ msgstr "Asistente"
-
-#~ msgid "Partner"
-#~ msgstr "Empresa"
