@@ -5,7 +5,7 @@
     "summary": "Adds active feature on mailing list contact and subscriptions",
     "version": "16.0.1.0.0",
     "category": "Marketing/Email Marketing",
-    "website": "https://github.com/OCA/social",
+    "website": "https://github.com/OCA/mass-mailing",
     "author": "Camptocamp, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "application": False,
