@@ -2,13 +2,36 @@
 # Copyright 2016 Tecnativa - Jairo Llopis
 # Copyright 2020 Tecnativa - Pedro M. Baeza
 # Copyright 2024 Tecnativa - David Vidal
+# Copyright 2025 Moduon Team
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo.http import request, route
+from odoo.tools.misc import str2bool
 
 from odoo.addons.mass_mailing.controllers.main import MassMailController
 
 
 class CustomUnsubscribe(MassMailController):
+    @route()
+    def mailing_confirm_unsubscribe(
+        self, mailing_id, document_id=None, email=None, hash_token=None
+    ):
+        """Redirect to the unsubscribe page if the redirect option is enabled."""
+        if str2bool(
+            request.env["ir.config_parameter"]
+            .sudo()
+            .get_param("mass_mailing.mailing_lists_unsubscribe_redirect", "0")
+        ):
+            # Redirect to mailing_unsubscribe() route
+            return request.redirect(
+                request.httprequest.path.replace(
+                    "/confirm_unsubscribe", "/unsubscribe"
+                ),
+                code=302,
+            )
+        return super().mailing_confirm_unsubscribe(
+            mailing_id, document_id=document_id, email=email, hash_token=hash_token
+        )
+
     def _mailing_unsubscribe_from_list(self, mailing, document_id, email, hash_token):
         self._add_metadata()
         return super()._mailing_unsubscribe_from_list(

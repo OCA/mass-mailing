@@ -94,3 +94,25 @@ class UICase(HttpCase):
         blacklist = self.env["mail.blacklist"].search([("email", "=", partner.email)])
         self.assertEqual(blacklist.opt_out_reason_id.name, "Other")
         self.assertTrue("REMOTE_ADDR" in "".join(blacklist.message_ids.mapped("body")))
+
+    def test_mailing_unsubscribe_redirect(self):
+        """Test that /confirm_unsubscribe redirects to /unsubscribe."""
+        # Create parameter to enable redirect
+        self.env["ir.config_parameter"].sudo().set_param(
+            "mass_mailing.mailing_lists_unsubscribe_redirect", "1"
+        )
+        # Change mailing to be sent to partner
+        partner_id = self.env["res.partner"].name_create(
+            f"Demo Partner <{self.email}>"
+        )[0]
+        self.mailing.mailing_model_id = self.env.ref("base.model_res_partner")
+        self.mailing.mailing_domain = repr(
+            [("is_blacklisted", "=", False), ("id", "=", partner_id)]
+        )
+        with self.mail_postprocess_patch:
+            self.mailing.action_send_mail()
+            result = self.url_open(self.url, allow_redirects=False)
+            self.assertTrue(result.ok)
+            self.assertTrue(result.is_redirect)
+            self.assertFalse(result.is_permanent_redirect)
+            self.assertIn("/unsubscribe", result.next.url)
