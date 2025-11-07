@@ -30,12 +30,22 @@ Mass mailing unsubscription metadata
 
 This addon extends the Odoo subscription engine to provide proof on why
 you are sending mass mailings to a given contact, as required by the
-GDPR in Europe.
+GDPR in Europe. Also, when you unsubscribe from a specific list, it
+allows you to be redirected to the subscription lists form where the
+reasons for unsubscribing are visible.
 
 **Table of contents**
 
 .. contents::
    :local:
+
+Configuration
+=============
+
+In order to redirect direct unsubscriptions to the Mailing Subscriptions
+form, you need to create the system parameter
+``mass_mailing.mailing_lists_unsubscribe_manager_redirect`` with value
+``1``. Otherwise, the redirect won't happen.
 
 Usage
 =====
@@ -47,7 +57,10 @@ Once configured:
    *Footers*, so people have an *Unsubscribe* link.
 3. Send it.
 4. If somebody gets unsubscribed, you will see logs about that under
-   *Email Marketing > Unsubscriptions*.
+   *Email Marketing > Reporting > Opt-Out report (List view) > Choose
+   one*
+5. Choose a Newsletter with Opt Out, open this record and see Metadata
+   field
 
 Bug Tracker
 ===========
@@ -81,6 +94,8 @@ Contributors
   - Carlos Roca
   - Pilar Vargas
   - Carlos Lopez
+
+- Eduardo de Miguel (`Moduon <https://www.moduon.team/>`__)
 
 Maintainers
 -----------
