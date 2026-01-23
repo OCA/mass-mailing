@@ -46,6 +46,23 @@
         </field>
     </record>
 
+    <record model="ir.ui.view" id="mailing_contact_view_form_split_name">
+        <field name="name">Mailing partner makes first and last names readonly</field>
+        <field name="model">mailing.contact</field>
+        <field
+            name="inherit_id"
+            ref="mass_mailing.mailing_contact_view_form_split_name"
+        />
+        <field name="arch" type="xml">
+            <field name="first_name" position="attributes">
+                <attribute name="readonly">partner_id</attribute>
+            </field>
+            <field name="last_name" position="attributes">
+                <attribute name="readonly">partner_id</attribute>
+            </field>
+        </field>
+    </record>
+
     <record model="ir.ui.view" id="view_mail_mass_mailing_contact_search">
         <field name="name">Add partner search field and group by</field>
         <field name="model">mailing.contact</field>
