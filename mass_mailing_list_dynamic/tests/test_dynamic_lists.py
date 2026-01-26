@@ -5,7 +5,7 @@
 from unittest.mock import patch
 
 from odoo.exceptions import ValidationError
-from odoo.tests import tagged
+from odoo.tests import Form, tagged
 
 from odoo.addons.base.tests.common import BaseCommon
 
@@ -85,18 +85,27 @@ class DynamicListCase(BaseCommon):
                 }
             )
         contact1 = Contact.search([("list_ids", "in", self.list.ids)], limit=1)
-        with self.assertRaises(ValidationError):
-            contact1.name = "other"
-        with self.assertRaises(ValidationError):
-            contact1.email = "other@example.com"
-        with self.assertRaises(ValidationError):
-            contact1.partner_id = self.partners[0]
+        with Form(contact1) as contact1_f:
+            # Fields are readonly
+            with self.assertRaises(AssertionError):
+                contact1_f.name = "other"
+            with self.assertRaises(AssertionError):
+                contact1_f.email = "other@example.com"
+        self.assertEqual(contact1.name, "partner 2")
+        self.assertEqual(contact1.email, "2@example.com")
+        self.assertTrue(contact1.in_fully_synced_lists)
         # Unset dynamic list
         self.list.dynamic = False
         # Now the contact is created without exception
         Contact.create({"list_ids": [(4, self.list.id)], "email": "test@example.com"})
         # Contacts can now be changed
-        contact1.name = "other"
+        self.assertFalse(contact1.in_fully_synced_lists)
+        with Form(contact1) as contact1_f:
+            contact1_f.partner_id = self.env["res.partner"]
+            contact1_f.name = "other"
+            contact1_f.email = "other@example.com"
+        self.assertEqual(contact1.name, "other")
+        self.assertEqual(contact1.email, "other@example.com")
 
     def test_sync_when_sending_mail(self):
         """Check that list in synced when sending a mass mailing."""
@@ -140,6 +149,59 @@ class DynamicListCase(BaseCommon):
         self.list.action_sync()
         # This shouldn't fail
         self.partners[:1].write({"email": "test_mass_mailing_list_dynamic@example.org"})
+
+    def test_delete_contact_from_nondynamic_list(self):
+        """Test manual management of contacts.
+
+        A contact linked to both dynamic and manual lists should still
+        allow manual management in manual lists.
+        """
+        manual_list = self.env["mailing.list"].create(
+            {
+                "name": "test non-dynamic list",
+                "dynamic": False,
+            }
+        )
+        self.list.sync_method = "full"
+        self.list.action_sync()
+        self.list.flush_recordset()
+        self.assertEqual(self.list.contact_count, 5)
+        self.assertEqual(self.list.contact_ids.partner_id, self.partners)
+        contact0 = self.list.contact_ids[0]
+        self.assertTrue(contact0.exists())
+        contact0_f = Form(contact0)
+        with contact0_f.subscription_ids.new() as subscription:
+            subscription.list_id = manual_list
+        contact0_f.save()
+        self.assertEqual(self.list.contact_count, 5)
+        self.assertEqual(manual_list.contact_count, 1)
+        self.assertIn(contact0, self.list.contact_ids)
+        self.assertIn(contact0, manual_list.contact_ids)
+
+    def test_add_fully_synced_contact_to_another_manual_list(self):
+        """Test adding a fully synced contact to another manual list."""
+        manual_list = self.env["mailing.list"].create(
+            {
+                "name": "test non-dynamic list",
+                "dynamic": False,
+            }
+        )
+        self.list.sync_method = "full"
+        self.list.action_sync()
+        self.list.flush_recordset()
+        self.assertEqual(self.list.contact_count, 5)
+        self.assertEqual(self.list.contact_ids.partner_id, self.partners)
+        contact0 = self.list.contact_ids[0]
+        self.assertTrue(contact0.exists())
+        contact0_f = Form(contact0)
+        with contact0_f.subscription_ids.new() as subscription:
+            subscription.list_id = manual_list
+        contact0_f.save()
+        contact0.flush_recordset()
+        self.assertEqual(self.list.contact_count, 5)
+        self.assertEqual(manual_list.contact_count, 1)
+        self.assertIn(contact0, self.list.contact_ids)
+        self.assertIn(contact0, manual_list.contact_ids)
 
     def test_is_synced(self):
         self.list.dynamic = False

@@ -1,0 +1,14 @@
+<!-- Copyright 2026 Moduon
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<data>
+    <record model="ir.ui.view" id="view_mail_mass_mailing_contact_form">
+        <field name="name">Readonly partner in fully synced contacts</field>
+        <field name="model">mailing.contact</field>
+        <field name="inherit_id" ref="mass_mailing.mailing_contact_view_form" />
+        <field name="arch" type="xml">
+            <field name="partner_id" position="attributes">
+                <attribute name="readonly">in_fully_synced_lists</attribute>
+            </field>
+        </field>
+    </record>
+</data>
