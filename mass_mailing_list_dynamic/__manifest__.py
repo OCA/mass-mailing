@@ -5,7 +5,7 @@
 {
     "name": "Dynamic Mass Mailing Lists",
     "summary": "Mass mailing lists that get autopopulated",
-    "version": "18.0.1.0.0",
+    "version": "18.0.1.0.1",
     "category": "Marketing",
     "website": "https://github.com/OCA/mass-mailing",
     "author": "Tecnativa, Odoo Community Association (OCA)",
