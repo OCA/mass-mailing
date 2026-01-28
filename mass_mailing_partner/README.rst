@@ -107,6 +107,10 @@ Contributors
 
      - Kevin Khao
 
+* `Moduon <https://www.moduon.team>`_:
+
+    * Jairo Llopis
+
 Other credits
 -------------
 
