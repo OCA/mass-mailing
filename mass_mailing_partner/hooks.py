@@ -17,9 +17,20 @@ def post_init_hook(env):
     contacts = contact_model.search([("email", "!=", False)])
     _logger.info("Trying to match %d contacts to partner by email", len(contacts))
     for contact in contacts:
-        partners = partner_model.search([("email", "=ilike", contact.email)], limit=1)
-        if partners:
+        partners = partner_model.search([("email", "=ilike", contact.email)])
+        if len(partners) == 1:
+            other_contact = contact_model.search(
+                [
+                    ("partner_id", "=", contact.partner_id.id),
+                    ("id", "!=", contact.id),
+                ]
+            )
+            if contact.list_ids & other_contact.mapped("list_ids"):
+                continue
+
             contact.write({"partner_id": partners.id})
+        else:
+            _logger.info("Skip matching: %d partners found!" % len(partners))
     # ACTION 2: Match existing statistics
     stat_model = env["mailing.trace"]
     stats = stat_model.search([("model", "!=", False), ("res_id", "!=", False)])
