@@ -26,8 +26,8 @@ def post_init_hook(env):
                 ]
             )
             if contact.list_ids & other_contact.mapped("list_ids"):
+                # This is because of duplicate records in the mailing contact
                 continue
-
             contact.write({"partner_id": partners.id})
         else:
             _logger.info("Skip matching: %d partners found!" % len(partners))
