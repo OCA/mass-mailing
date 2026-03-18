@@ -11,8 +11,8 @@ msgstr ""
 "POT-Creation-Date: 2017-12-01 02:19+0000\n"
 "PO-Revision-Date: 2017-12-01 02:19+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
-"Language-Team: Lithuanian (Lithuania) (https://www.transifex.com/oca/"
-"teams/23907/lt_LT/)\n"
+"Language-Team: Lithuanian (Lithuania) (https://www.transifex.com/oca/teams/"
+"23907/lt_LT/)\n"
 "Language: lt_LT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,7 +24,6 @@ msgstr ""
 #. odoo-python
 #: code:addons/mass_mailing_partner/models/mailing_list.py:0
 #: code:addons/mass_mailing_partner/models/mailing_subscription.py:0
-#, python-format
 msgid "A partner cannot be multiple times in the same list"
 msgstr ""
 
@@ -154,20 +153,12 @@ msgstr ""
 #. module: mass_mailing_partner
 #. odoo-python
 #: code:addons/mass_mailing_partner/wizard/partner_mail_list_wizard.py:0
-#, python-format
-msgid "Partner '%s' has no email."
+msgid "Partner '%(name)s' has no email."
 msgstr ""
 
 #. module: mass_mailing_partner
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_mailing_list__partner_category
 msgid "Partner Tag"
-msgstr ""
-
-#. module: mass_mailing_partner
-#. odoo-python
-#: code:addons/mass_mailing_partner/models/mailing_contact.py:0
-#, python-format
-msgid "Partner already exists in one of these mailing lists"
 msgstr ""
 
 #. module: mass_mailing_partner
@@ -178,8 +169,7 @@ msgstr ""
 #. module: mass_mailing_partner
 #. odoo-python
 #: code:addons/mass_mailing_partner/models/res_partner.py:0
-#, python-format
 msgid ""
-"This partner '%s' is linked to one or more mass mailing contact. Email must "
-"be assigned."
+"This partner '%(name)s' is linked to one or more mass mailing contact. Email "
+"must be assigned."
 msgstr ""
