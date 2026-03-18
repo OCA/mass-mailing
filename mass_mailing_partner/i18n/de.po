@@ -23,7 +23,6 @@ msgstr ""
 #. odoo-python
 #: code:addons/mass_mailing_partner/models/mailing_list.py:0
 #: code:addons/mass_mailing_partner/models/mailing_subscription.py:0
-#, python-format
 msgid "A partner cannot be multiple times in the same list"
 msgstr "Ein Partner kann nicht mehrfach in derselben Liste aufgeführt sein"
 
@@ -153,21 +152,13 @@ msgstr "Partner"
 #. module: mass_mailing_partner
 #. odoo-python
 #: code:addons/mass_mailing_partner/wizard/partner_mail_list_wizard.py:0
-#, python-format
-msgid "Partner '%s' has no email."
-msgstr "Der Partner '%s' hat keine E-Mail-Adresse."
+msgid "Partner '%(name)s' has no email."
+msgstr ""
 
 #. module: mass_mailing_partner
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_mailing_list__partner_category
 msgid "Partner Tag"
 msgstr "Partner-Stichwort"
-
-#. module: mass_mailing_partner
-#. odoo-python
-#: code:addons/mass_mailing_partner/models/mailing_contact.py:0
-#, python-format
-msgid "Partner already exists in one of these mailing lists"
-msgstr "Der Partner ist bereits in einer dieser Mailinglisten vorhanden"
 
 #. module: mass_mailing_partner
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_mailing_contact__tag_ids
@@ -177,13 +168,26 @@ msgstr "Stichwörter"
 #. module: mass_mailing_partner
 #. odoo-python
 #: code:addons/mass_mailing_partner/models/res_partner.py:0
-#, python-format
 msgid ""
-"This partner '%s' is linked to one or more mass mailing contact. Email must "
-"be assigned."
+"This partner '%(name)s' is linked to one or more mass mailing contact. Email "
+"must be assigned."
 msgstr ""
-"Dieser Partner '%s' ist mit einem oder mehreren Massenmailing-Kontakten "
-"verknüpft. Eine E-Mail-Adresse muss zugewiesen sein."
+
+#, python-format
+#~ msgid "Partner '%s' has no email."
+#~ msgstr "Der Partner '%s' hat keine E-Mail-Adresse."
+
+#, python-format
+#~ msgid "Partner already exists in one of these mailing lists"
+#~ msgstr "Der Partner ist bereits in einer dieser Mailinglisten vorhanden"
+
+#, python-format
+#~ msgid ""
+#~ "This partner '%s' is linked to one or more mass mailing contact. Email "
+#~ "must be assigned."
+#~ msgstr ""
+#~ "Dieser Partner '%s' ist mit einem oder mehreren Massenmailing-Kontakten "
+#~ "verknüpft. Eine E-Mail-Adresse muss zugewiesen sein."
 
 #~ msgid "Last Modified on"
 #~ msgstr "Zuletzt geändert am"

@@ -155,12 +155,6 @@ msgid "Partner Tag"
 msgstr ""
 
 #. module: mass_mailing_partner
-#. odoo-python
-#: code:addons/mass_mailing_partner/models/mailing_contact.py:0
-msgid "Partner already exists in one of these mailing lists: %(name)s"
-msgstr ""
-
-#. module: mass_mailing_partner
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_mailing_contact__tag_ids
 msgid "Tags"
 msgstr ""
