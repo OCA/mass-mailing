@@ -37,33 +37,29 @@ class MassMailingList(models.Model):
         """Sync contacts in dynamic lists."""
         Contact = self.env["mailing.contact"].with_context(syncing=True)
         Partner = self.env["res.partner"]
+        detached = Contact
         # Skip non-dynamic lists
         dynamic = self.filtered("dynamic").with_context(syncing=True)
         for one in dynamic:
             sync_domain = [("email", "!=", False)] + safe_eval(one.sync_domain)
             desired_partners = Partner.search(sync_domain)
+            final_contacts = one.contact_ids
             # Detach or remove undesired contacts when synchronization is full
             if one.sync_method == "full":
-                contact_to_detach = one.contact_ids.filtered(
+                final_contacts -= final_contacts.filtered(
                     lambda r, dp=desired_partners: r.partner_id not in dp
                 )
-                one.contact_ids -= contact_to_detach
-                contact_to_detach.filtered(lambda r: not r.list_ids).unlink()
             # Add new contacts
-            current_partners = one.contact_ids.mapped("partner_id")
-            contact_to_list = self.env["mailing.contact"]
-            vals_list = []
+            current_partners = final_contacts.mapped("partner_id")
             for partner in desired_partners - current_partners:
-                contacts_in_partner = partner.mass_mailing_contact_ids
-                if contacts_in_partner:
-                    contact_to_list |= contacts_in_partner[0]
-                else:
-                    vals_list.append(
-                        {"list_ids": [(4, one.id)], "partner_id": partner.id}
-                    )
-            one.contact_ids |= contact_to_list
-            Contact.create(vals_list)
+                final_contacts |= partner.mass_mailing_contact_ids[:1] or self.env[
+                    "mailing.contact"
+                ].new({"partner_id": partner.id})
+            detached |= one.contact_ids - final_contacts
+            one.contact_ids = final_contacts
             one.is_synced = True
+        # Clean up empty detached contacts
+        detached.filtered(lambda rec: not rec.list_ids).unlink()
         # Invalidate cached contact count
         dynamic.invalidate_recordset(["contact_count"])
 
