@@ -18,17 +18,19 @@ class MailingList(models.Model):
 
     @api.constrains("contact_ids")
     def _check_contact_ids_partner_id(self):
-        contact_obj = self.env["mailing.contact"]
+        failures = self.env["mailing.contact"]
         for mailing_list in self:
-            data = contact_obj.read_group(
-                [
-                    ("id", "in", mailing_list.contact_ids.ids),
-                    ("partner_id", "!=", False),
-                ],
-                ["partner_id"],
-                ["partner_id"],
-            )
-            if len(list(filter(lambda r: r["partner_id_count"] > 1, data))):
-                raise ValidationError(
-                    self.env._("A partner cannot be multiple times " "in the same list")
+            partners = self.env["res.partner"]
+            for contact in mailing_list.contact_ids:
+                if contact.partner_id:
+                    if contact.partner_id in partners:
+                        failures |= contact
+                    partners |= contact.partner_id
+        if failures:
+            raise ValidationError(
+                self.env._(
+                    "A partner cannot be multiple times in the same list. "
+                    "Failed contacts:\n - %s",
+                    "\n- ".join(failures.mapped(lambda c: f"{c.name} ({c.email})")),
                 )
+            )
