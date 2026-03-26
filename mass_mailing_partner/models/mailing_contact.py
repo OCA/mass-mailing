@@ -7,7 +7,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import api, fields, models
-from odoo.exceptions import ValidationError
 
 
 class MailingContact(models.Model):
@@ -25,25 +24,6 @@ class MailingContact(models.Model):
             if rec.partner_id.category_id:
                 tags = rec.partner_id.category_id
             rec.tag_ids = tags
-
-    @api.constrains("partner_id", "list_ids")
-    def _check_partner_id_list_ids(self):
-        for contact in self:
-            if contact.partner_id:
-                other_contact = self.search(
-                    [
-                        ("partner_id", "=", contact.partner_id.id),
-                        ("id", "!=", contact.id),
-                    ]
-                )
-                if contact.list_ids & other_contact.mapped("list_ids"):
-                    raise ValidationError(
-                        self.env._(
-                            "Partner already exists in one of these mailing lists: "
-                            "%(name)s"
-                        )
-                        % {"name": contact.partner_id.display_name}
-                    )
 
     @api.onchange("partner_id")
     def _onchange_partner_mass_mailing_partner(self):
@@ -101,7 +81,7 @@ class MailingContact(models.Model):
 
     def _set_partner(self):
         self.ensure_one()
-        if not self.email:
+        if not self.email or self.partner_id:
             return
         m_partner = self.env["res.partner"]
         # Look for a partner with that email
