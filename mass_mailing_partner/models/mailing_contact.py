@@ -30,7 +30,6 @@ class MailingContact(models.Model):
         if self.partner_id:
             self.name = self.partner_id.name
             self.email = self.partner_id.email
-            self.title_id = self.partner_id.title
             self.company_name = (
                 self.partner_id.company_id.name or self.partner_id.company_name
             )
@@ -55,6 +54,14 @@ class MailingContact(models.Model):
         return result
 
     def write(self, vals):
+        # If partner_id is changing, sync dependent fields from partner
+        # to ensure consistency
+        if "partner_id" in vals and vals["partner_id"]:
+            partner = self.env["res.partner"].browse(vals["partner_id"])
+            vals["name"] = partner.name
+            vals["email"] = partner.email
+            vals["company_name"] = partner.company_id.name or partner.company_name
+            vals["country_id"] = partner.country_id.id
         result = super().write(vals)
         for contact in self:
             contact._overwrite_partner(vals)
@@ -73,7 +80,6 @@ class MailingContact(models.Model):
             "name": self.name or self.email,
             "email": self.email,
             "country_id": self.country_id.id,
-            "title": self.title_id.id,
             "company_name": self.company_name,
             "company_id": False,
             "category_id": self._get_categories(),

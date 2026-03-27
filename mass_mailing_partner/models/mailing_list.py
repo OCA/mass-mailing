@@ -20,15 +20,15 @@ class MailingList(models.Model):
     def _check_contact_ids_partner_id(self):
         contact_obj = self.env["mailing.contact"]
         for mailing_list in self:
-            data = contact_obj.read_group(
+            data = contact_obj._read_group(
                 [
                     ("id", "in", mailing_list.contact_ids.ids),
                     ("partner_id", "!=", False),
                 ],
                 ["partner_id"],
-                ["partner_id"],
+                ["__count"],
             )
-            if len(list(filter(lambda r: r["partner_id_count"] > 1, data))):
+            if any(count > 1 for _partner, count in data):
                 raise ValidationError(
                     self.env._("A partner cannot be multiple times in the same list")
                 )
