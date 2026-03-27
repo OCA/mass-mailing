@@ -41,52 +41,49 @@ class ResPartner(models.Model):
                 raise ValidationError(
                     self.env._(
                         "This partner '%(name)s' is linked to one or more mass "
-                        "mailing contact. Email must be assigned."
+                        "mailing contact. Email must be assigned.",
+                        name=partner.name,
                     )
-                    % {"name": partner.name}
                 )
 
     @api.depends("mass_mailing_contact_ids")
     def _compute_mass_mailing_contacts_count(self):
-        contact_data = self.env["mailing.contact"].read_group(
-            [("partner_id", "in", self.ids)], ["partner_id"], ["partner_id"]
+        contact_data = self.env["mailing.contact"]._read_group(
+            [("partner_id", "in", self.ids)], ["partner_id"], ["__count"]
         )
-        mapped_data = {
-            contact["partner_id"][0]: contact["partner_id_count"]
-            for contact in contact_data
-        }
+        mapped_data = {partner.id: count for partner, count in contact_data if partner}
         for partner in self:
             partner.mass_mailing_contacts_count = mapped_data.get(partner.id, 0)
 
     @api.depends("mass_mailing_stats_ids")
     def _compute_mass_mailing_stats_count(self):
-        contact_data = self.env["mailing.trace"].read_group(
-            [("partner_id", "in", self.ids)], ["partner_id"], ["partner_id"]
+        contact_data = self.env["mailing.trace"]._read_group(
+            [("partner_id", "in", self.ids)], ["partner_id"], ["__count"]
         )
-        mapped_data = {
-            contact["partner_id"][0]: contact["partner_id_count"]
-            for contact in contact_data
-        }
+        mapped_data = {partner.id: count for partner, count in contact_data if partner}
         for partner in self:
             partner.mass_mailing_stats_count = mapped_data.get(partner.id, 0)
 
     def write(self, vals):
         res = super().write(vals)
-        mm_vals = {}
-        if vals.get("name"):
-            mm_vals["name"] = vals["name"]
-        if vals.get("email"):
-            mm_vals["email"] = vals["email"]
-        if vals.get("title"):
-            mm_vals["title_id"] = vals["title"]
-        if vals.get("company_id"):
-            company = self.env["res.company"].browse(vals.get("company_id"))
-            mm_vals["company_name"] = company.name
-        if vals.get("country_id"):
-            mm_vals["country_id"] = vals["country_id"]
+        mm_vals = self._prepare_mass_mailing_values(vals)
         if mm_vals:
             # Using sudo because ACLs shouldn't produce data inconsistency
             self.env["mailing.contact"].sudo().search(
                 [("partner_id", "in", self.ids)]
             ).write(mm_vals)
         return res
+
+    @api.model
+    def _prepare_mass_mailing_values(self, vals):
+        mm_vals = {}
+        if "name" in vals:
+            mm_vals["name"] = vals["name"]
+        if "email" in vals:
+            mm_vals["email"] = vals["email"]
+        if "company_id" in vals:
+            company = self.env["res.company"].browse(vals["company_id"])
+            mm_vals["company_name"] = company.name
+        if "country_id" in vals:
+            mm_vals["country_id"] = vals["country_id"]
+        return mm_vals
