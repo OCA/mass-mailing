@@ -26,15 +26,17 @@ class ResPartnerCase(base.BaseCase):
         )
         self.assertEqual(self.partner, contact.partner_id)
 
-        title_doctor = self.env.ref("base.res_partner_title_doctor")
         country_cu = self.env.ref("base.cu")
-        category_8 = self.env.ref("base.res_partner_category_8")
-        category_11 = self.env.ref("base.res_partner_category_11")
+        category_8 = self.env["res.partner.category"].create(
+            {"name": "Test Category 8"}
+        )
+        category_11 = self.env["res.partner.category"].create(
+            {"name": "Test Category 11"}
+        )
         self.partner.write(
             {
                 "name": "Changed",
                 "email": "partner@changed.com",
-                "title": title_doctor.id,
                 "company_id": self.main_company.id,
                 "country_id": country_cu.id,
                 "category_id": [(6, 0, (category_8 | category_11).ids)],

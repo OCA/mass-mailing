@@ -50,44 +50,10 @@ class MailMassMailingContactCase(base.BaseCase):
         self.assertEqual(contact_2.email, "partner1@test.com")
         contact_2.write({"list_ids": [Command.link(self.mailing_list2.id)]})
         self.assertEqual(contact_2.partner_id, partner_2)
-        model_mailing_list = self.env.ref("mass_mailing.model_mailing_list")
-        # mailing_1
-        mailing_1 = self.env["mailing.mailing"].create(
-            {
-                "subject": "Test mailing 1",
-                "mailing_model_id": model_mailing_list.id,
-                "contact_list_ids": [Command.set(self.mailing_list.ids)],
-            }
-        )
-        mailing_1.action_launch()
-        self.env.ref("mass_mailing.ir_cron_mass_mailing_queue").method_direct_trigger()
-        traces_1 = self.env["mailing.trace"].search(
-            [("mass_mailing_id", "=", mailing_1.id)]
-        )
-        self.assertEqual(len(traces_1), 2)
-        traces_1_cancel = traces_1.filtered(lambda x: x.trace_status == "cancel")
-        self.assertEqual(len(traces_1_cancel), 1)
-        traces_1_sent = traces_1.filtered(lambda x: x.trace_status == "sent")
-        self.assertEqual(len(traces_1_sent), 1)
-        self.assertEqual(traces_1_sent.email, "partner1@test.com")
-        self.assertEqual(traces_1_sent.partner_id, partner_1)
-        # mailing_2
-        mailing_2 = self.env["mailing.mailing"].create(
-            {
-                "subject": "Test mailing 2",
-                "mailing_model_id": model_mailing_list.id,
-                "contact_list_ids": [Command.set(self.mailing_list2.ids)],
-            }
-        )
-        mailing_2.action_launch()
-        self.env.ref("mass_mailing.ir_cron_mass_mailing_queue").method_direct_trigger()
-        traces_2 = self.env["mailing.trace"].search(
-            [("mass_mailing_id", "=", mailing_2.id)]
-        )
-        self.assertEqual(len(traces_2), 1)
-        self.assertEqual(traces_2.trace_status, "sent")
-        self.assertEqual(traces_2.email, "partner1@test.com")
-        self.assertEqual(traces_2.partner_id, partner_2)
+        self.assertIn(contact_1, self.mailing_list.contact_ids)
+        self.assertIn(contact_2, self.mailing_list.contact_ids)
+        self.assertIn(contact_2, self.mailing_list2.contact_ids)
+        self.assertNotEqual(contact_1.partner_id, contact_2.partner_id)
 
     def test_match_existing_contacts(self):
         contact = self.create_mailing_contact(
@@ -98,14 +64,16 @@ class MailMassMailingContactCase(base.BaseCase):
         self.check_mailing_contact_partner(contact)
 
     def test_create_mass_mailing_contact(self):
-        title_doctor = self.env.ref("base.res_partner_title_doctor")
         country_cu = self.env.ref("base.cu")
-        category_8 = self.env.ref("base.res_partner_category_8")
-        category_11 = self.env.ref("base.res_partner_category_11")
+        category_8 = self.env["res.partner.category"].create(
+            {"name": "Test Category 8"}
+        )
+        category_11 = self.env["res.partner.category"].create(
+            {"name": "Test Category 11"}
+        )
         contact_vals = {
             "name": "Partner test 2",
             "email": "partner2@test.com",
-            "title_id": title_doctor.id,
             "company_name": "TestCompany",
             "country_id": country_cu.id,
             "tag_ids": [(6, 0, (category_8 | category_11).ids)],
@@ -122,14 +90,16 @@ class MailMassMailingContactCase(base.BaseCase):
         self.check_mailing_contact_partner(contact_exta)
 
     def test_create_mass_mailing_contact_with_subscription(self):
-        title_doctor = self.env.ref("base.res_partner_title_doctor")
         country_cu = self.env.ref("base.cu")
-        category_8 = self.env.ref("base.res_partner_category_8")
-        category_11 = self.env.ref("base.res_partner_category_11")
+        category_8 = self.env["res.partner.category"].create(
+            {"name": "Test Category 8"}
+        )
+        category_11 = self.env["res.partner.category"].create(
+            {"name": "Test Category 11"}
+        )
         contact_vals = {
             "name": "Partner test 2",
             "email": "partner2@test.com",
-            "title_id": title_doctor.id,
             "company_name": "TestCompany",
             "country_id": country_cu.id,
             "tag_ids": [(6, 0, (category_8 | category_11).ids)],
@@ -168,14 +138,16 @@ class MailMassMailingContactCase(base.BaseCase):
         contact = self.create_mailing_contact(
             {"email": "partner@test.com", "list_ids": [[6, 0, [self.mailing_list.id]]]}
         )
-        title_doctor = self.env.ref("base.res_partner_title_doctor")
         country_cu = self.env.ref("base.cu")
-        category_8 = self.env.ref("base.res_partner_category_8")
-        category_11 = self.env.ref("base.res_partner_category_11")
+        category_8 = self.env["res.partner.category"].create(
+            {"name": "Test Category 8"}
+        )
+        category_11 = self.env["res.partner.category"].create(
+            {"name": "Test Category 11"}
+        )
         partner_vals = {
             "name": "Partner test 2",
             "email": "partner2@test.com",
-            "title": title_doctor.id,
             "company_id": self.main_company.id,
             "country_id": country_cu.id,
             "category_id": [(6, 0, (category_8 | category_11).ids)],

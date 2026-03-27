@@ -33,13 +33,11 @@ class PartnerMailListWizard(models.TransientModel):
         for partner in to_create:
             if not partner.email:
                 raise UserError(
-                    self.env._("Partner '%(name)s' has no email.")
-                    % {"name": partner.name}
+                    self.env._("Partner '%(name)s' has no email.", name=partner.name)
                 )
             contact_vals = {
                 "partner_id": partner.id,
                 "list_ids": [(4, self.mail_list_id.id)],
-                "title_id": partner.title.id or False,
                 "company_name": partner.company_id.name or False,
                 "country_id": partner.country_id.id or False,
             }
