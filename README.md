@@ -23,7 +23,7 @@ addon | version | maintainers | summary
 --- | --- | --- | ---
 [mass_mailing_custom_unsubscribe](mass_mailing_custom_unsubscribe/) | 18.0.1.0.0 |  | Track metadata for GDPR compliance
 [mass_mailing_event_registration_exclude](mass_mailing_event_registration_exclude/) | 18.0.1.0.0 |  | Link mass mailing with event for excluding recipients
-[mass_mailing_list_dynamic](mass_mailing_list_dynamic/) | 18.0.1.0.1 |  | Mass mailing lists that get autopopulated
+[mass_mailing_list_dynamic](mass_mailing_list_dynamic/) | 18.0.1.0.2 |  | Mass mailing lists that get autopopulated
 [mass_mailing_partner](mass_mailing_partner/) | 18.0.1.1.0 |  | Link partners with mass-mailing
 [mass_mailing_resend](mass_mailing_resend/) | 18.0.1.0.0 | <a href='https://github.com/pedrobaeza'><img src='https://github.com/pedrobaeza.png' width='32' height='32' style='border-radius:50%;' alt='pedrobaeza'/></a> | Resend mass mailings
 
