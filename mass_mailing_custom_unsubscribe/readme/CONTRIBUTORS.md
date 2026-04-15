@@ -8,3 +8,5 @@
   - Carlos Roca
   - Pilar Vargas
   - Carlos Lopez
+
+- Eduardo de Miguel ([Moduon](https://www.moduon.team/))
