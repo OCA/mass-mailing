@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-01 02:19+0000\n"
-"PO-Revision-Date: 2024-07-08 08:59+0000\n"
+"PO-Revision-Date: 2026-04-21 09:45+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: mass_mailing_partner
 #. odoo-python
@@ -153,7 +153,7 @@ msgstr "Partner"
 #. odoo-python
 #: code:addons/mass_mailing_partner/wizard/partner_mail_list_wizard.py:0
 msgid "Partner '%(name)s' has no email."
-msgstr ""
+msgstr "Il partner '%(name)s' non ha e-mail."
 
 #. module: mass_mailing_partner
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_mailing_list__partner_category
@@ -172,6 +172,8 @@ msgid ""
 "This partner '%(name)s' is linked to one or more mass mailing contact. Email "
 "must be assigned."
 msgstr ""
+"Questo partner '%(name)s' è collegato a uno o più contatti di invio di "
+"massa. L'e-mail deve essere assegnata."
 
 #, python-format
 #~ msgid "Partner '%s' has no email."
