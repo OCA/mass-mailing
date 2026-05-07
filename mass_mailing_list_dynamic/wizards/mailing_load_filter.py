@@ -14,7 +14,7 @@ class MailingLoadFilter(models.TransientModel):
         string="Filter to load",
         required=True,
         domain="[('model_id', '=', 'res.partner'), '|', "
-        "('user_id', '=', uid), ('user_id','=',False)]",
+        "('user_ids', '=', uid), ('user_ids','=',False)]",
         ondelete="cascade",
     )
 

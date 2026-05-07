@@ -20,11 +20,11 @@ class MassMailingList(models.Model):
         ],
         default="add",
         required=True,
-        help="Choose the syncronization method for this list if you want to "
+        help="Choose the synchronization method for this list if you want to "
         "make it dynamic",
     )
     sync_domain = fields.Char(
-        string="Synchronization critera",
+        string="Synchronization criteria",
         default="[('is_blacklisted', '=', False), ('email', '!=', False)]",
         required=True,
         help="Filter partners to sync in this list",
