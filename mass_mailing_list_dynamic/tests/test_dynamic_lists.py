@@ -19,9 +19,9 @@ class DynamicListCase(BaseCommon):
         cls.partners = cls.env["res.partner"].create(
             [
                 {
-                    "name": "partner %d" % number,
+                    "name": f"partner {number}",
                     "category_id": [(4, cls.tag.id, False)],
-                    "email": "%d@example.com" % number,
+                    "email": f"{number}@example.com",
                 }
                 for number in range(5)
             ]
@@ -114,7 +114,10 @@ class DynamicListCase(BaseCommon):
         )
         # Mock sending low level method, because an auto-commit happens there
         self.mail.action_launch()
-        with patch("odoo.addons.mail.models.mail_mail.MailMail.send") as s:
+        with (
+            patch("odoo.addons.base.models.ir_cron.IrCron._commit_progress"),
+            patch("odoo.addons.mail.models.mail_mail.MailMail.send") as s,
+        ):
             self.mail._process_mass_mailing_queue()
             self.assertEqual(1, s.call_count)
         self.list.flush_recordset()

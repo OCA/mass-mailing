@@ -25,3 +25,7 @@
 - [Moduon](https://www.moduon.team/):
 
     - Jairo Llopis
+
+- [Komit](https://komit-consulting.com):
+
+  - Ngoc Quoc Pham \<<quoc-pn@komit-consulting.com>\>
