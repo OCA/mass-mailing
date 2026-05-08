@@ -21,7 +21,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
-[mass_mailing_partner](mass_mailing_partner/) | 19.0.1.0.0 |  | Link partners with mass-mailing
+[mass_mailing_partner](mass_mailing_partner/) | 19.0.1.1.0 |  | Link partners with mass-mailing
 [mass_mailing_partner_title](mass_mailing_partner_title/) | 19.0.1.0.0 |  | Link partner titles with mass-mailing
 
 [//]: # (end addons)
