@@ -45,7 +45,8 @@ class DynamicListCase(BaseCommon):
 
     def _mailing_action_done(self):
         self.mass_mailing.action_launch()
-        self.mm_cron.method_direct_trigger()
+        with self.enter_registry_test_mode():
+            self.mm_cron.method_direct_trigger()
 
     def test_resend_process(self):
         # Send mailing
