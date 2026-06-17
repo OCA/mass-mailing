@@ -1,7 +1,8 @@
 [project]
 name = "odoo-addons-oca-mass-mailing"
-version = "19.0.20260416.0"
+version = "19.0.20260617.0"
 dependencies = [
+    "odoo-addon-mass_mailing_list_dynamic==19.0.*",
     "odoo-addon-mass_mailing_partner==19.0.*",
     "odoo-addon-mass_mailing_partner_title==19.0.*",
 ]
