@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0\n"
+"Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -56,7 +56,7 @@ msgstr ""
 #. module: mass_mailing_list_dynamic
 #: model:ir.model.fields,help:mass_mailing_list_dynamic.field_mailing_list__sync_method
 msgid ""
-"Choose the syncronization method for this list if you want to make it "
+"Choose the synchronization method for this list if you want to make it "
 "dynamic"
 msgstr ""
 
@@ -76,7 +76,12 @@ msgid "Created on"
 msgstr ""
 
 #. module: mass_mailing_list_dynamic
+#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_base_partner_merge_automatic_wizard__display_name
+#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mailing_contact__display_name
+#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mailing_list__display_name
 #: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mailing_load_filter__display_name
+#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mailing_mailing__display_name
+#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_res_partner__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -106,7 +111,12 @@ msgid "Helper field to make the user aware of unsynced changes"
 msgstr ""
 
 #. module: mass_mailing_list_dynamic
+#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_base_partner_merge_automatic_wizard__id
+#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mailing_contact__id
+#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mailing_list__id
 #: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mailing_load_filter__id
+#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mailing_mailing__id
+#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_res_partner__id
 msgid "ID"
 msgstr ""
 
@@ -181,5 +191,5 @@ msgstr ""
 
 #. module: mass_mailing_list_dynamic
 #: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mailing_list__sync_domain
-msgid "Synchronization critera"
+msgid "Synchronization criteria"
 msgstr ""
