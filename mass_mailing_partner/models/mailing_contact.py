@@ -31,7 +31,9 @@ class MailingContact(models.Model):
             self.name = self.partner_id.name
             self.email = self.partner_id.email
             self.company_name = (
-                self.partner_id.company_id.name or self.partner_id.company_name
+                self.partner_id.parent_id.name
+                or self.partner_id.company_name
+                or self.partner_id.commercial_company_name
             )
             self.country_id = self.partner_id.country_id
 
@@ -60,7 +62,11 @@ class MailingContact(models.Model):
             partner = self.env["res.partner"].browse(vals["partner_id"])
             vals["name"] = partner.name
             vals["email"] = partner.email
-            vals["company_name"] = partner.company_id.name or partner.company_name
+            vals["company_name"] = (
+                partner.parent_id.name
+                or partner.company_name
+                or partner.commercial_company_name
+            )
             vals["country_id"] = partner.country_id.id
         result = super().write(vals)
         for contact in self:

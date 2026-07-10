@@ -81,9 +81,9 @@ class ResPartner(models.Model):
             mm_vals["name"] = vals["name"]
         if "email" in vals:
             mm_vals["email"] = vals["email"]
-        if "company_id" in vals:
-            company = self.env["res.company"].browse(vals["company_id"])
-            mm_vals["company_name"] = company.name
+        if "parent_id" in vals:
+            parent = self.env["res.partner"].browse(vals["parent_id"])
+            mm_vals["company_name"] = parent.name or False
         if "country_id" in vals:
             mm_vals["country_id"] = vals["country_id"]
         return mm_vals
