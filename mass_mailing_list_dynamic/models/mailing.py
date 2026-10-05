@@ -14,3 +14,29 @@ class MassMailing(models.Model):
         # will be blocked forever.
         self.contact_list_ids.action_sync()
         return super().action_launch()
+
+    def _get_remaining_recipients(self):
+        recipient_ids = super()._get_remaining_recipients()
+        if not recipient_ids:
+            return recipient_ids
+
+        if self.mailing_model_real != "mailing.contact":
+            return recipient_ids
+
+        duplicate_ids = set(
+            self.env["mailing.contact"]
+            .sudo()
+            .search(
+                [
+                    ("id", "in", recipient_ids),
+                    ("duplicated_partner_id", "!=", False),
+                ]
+            )
+            .ids
+        )
+
+        return [
+            recipient_id
+            for recipient_id in recipient_ids
+            if recipient_id not in duplicate_ids
+        ]

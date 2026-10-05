@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record
+        id="view_mail_mass_mailing_contact_form_dynamic_duplicate"
+        model="ir.ui.view"
+    >
+        <field name="name">mailing.contact.form.dynamic.duplicate</field>
+        <field name="model">mailing.contact</field>
+        <field
+            name="inherit_id"
+            ref="mass_mailing_partner.view_mail_mass_mailing_contact_form"
+        />
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="duplicated_partner_id" readonly="partner_id != False" />
+            </field>
+
+            <field name="partner_id" position="attributes">
+                <attribute name="readonly">duplicated_partner_id != False</attribute>
+            </field>
+
+            <field name="name" position="attributes">
+                <attribute
+                    name="readonly"
+                >partner_id or duplicated_partner_id</attribute>
+            </field>
+
+            <field name="title_id" position="attributes">
+                <attribute
+                    name="readonly"
+                >partner_id or duplicated_partner_id</attribute>
+            </field>
+
+            <field name="email" position="attributes">
+                <attribute
+                    name="readonly"
+                >partner_id or duplicated_partner_id</attribute>
+            </field>
+
+            <field name="company_name" position="attributes">
+                <attribute
+                    name="readonly"
+                >partner_id or duplicated_partner_id</attribute>
+            </field>
+
+            <field name="country_id" position="attributes">
+                <attribute
+                    name="readonly"
+                >partner_id or duplicated_partner_id</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record
+        id="view_mail_mass_mailing_contact_tree_dynamic_duplicate"
+        model="ir.ui.view"
+    >
+        <field name="name">mailing.contact.tree.dynamic.duplicate</field>
+        <field name="model">mailing.contact</field>
+        <field
+            name="inherit_id"
+            ref="mass_mailing_partner.view_mail_mass_mailing_contact_tree"
+        />
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="duplicated_partner_id" optional="hide" />
+            </field>
+        </field>
+    </record>
+</odoo>

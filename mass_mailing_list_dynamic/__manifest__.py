@@ -18,5 +18,6 @@
         # This should go before "mailing_list_view.xml"
         "wizards/mailing_load_filter_views.xml",
         "views/mailing_list_view.xml",
+        "views/mailing_contact_views.xml",
     ],
 }
