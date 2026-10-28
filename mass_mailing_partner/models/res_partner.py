@@ -17,12 +17,6 @@ class ResPartner(models.Model):
         comodel_name="mailing.contact",
         inverse_name="partner_id",
     )
-    mass_mailing_contacts_count = fields.Integer(
-        string="Mailing contacts number",
-        compute="_compute_mass_mailing_contacts_count",
-        store=True,
-        compute_sudo=True,
-    )
     mass_mailing_stats_ids = fields.One2many(
         string="Mass mailing stats",
         comodel_name="mailing.trace",
@@ -45,15 +39,6 @@ class ResPartner(models.Model):
                         name=partner.name,
                     )
                 )
-
-    @api.depends("mass_mailing_contact_ids")
-    def _compute_mass_mailing_contacts_count(self):
-        contact_data = self.env["mailing.contact"]._read_group(
-            [("partner_id", "in", self.ids)], ["partner_id"], ["__count"]
-        )
-        mapped_data = {partner.id: count for partner, count in contact_data if partner}
-        for partner in self:
-            partner.mass_mailing_contacts_count = mapped_data.get(partner.id, 0)
 
     @api.depends("mass_mailing_stats_ids")
     def _compute_mass_mailing_stats_count(self):

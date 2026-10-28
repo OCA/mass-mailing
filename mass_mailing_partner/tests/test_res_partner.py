@@ -18,7 +18,7 @@ class ResPartnerCase(base.BaseCase):
         self.create_mailing_contact(
             {"email": "partner@test.com", "list_ids": [[6, 0, [self.mailing_list2.id]]]}
         )
-        self.assertEqual(self.partner.mass_mailing_contacts_count, 2)
+        self.assertEqual(len(self.partner.mass_mailing_contact_ids), 2)
 
     def test_write_res_partner(self):
         contact = self.create_mailing_contact(

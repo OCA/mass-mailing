@@ -21,13 +21,13 @@ Link partners with mass-mailing
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fmass--mailing-lightgray.png?logo=github
-    :target: https://github.com/OCA/mass-mailing/tree/19.0/mass_mailing_partner
+    :target: https://github.com/OCA/mass-mailing/tree/20.0/mass_mailing_partner
     :alt: OCA/mass-mailing
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/mass-mailing-19-0/mass-mailing-19-0-mass_mailing_partner
+    :target: https://translation.odoo-community.org/projects/mass-mailing-20-0/mass-mailing-20-0-mass_mailing_partner
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/mass-mailing&target_branch=19.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/mass-mailing&target_branch=20.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
@@ -40,7 +40,8 @@ Features
 - When creating or saving a mass-mailing contact, partners are matched
   through email, linking matched partner, or creating a new one if no
   match and the maling list partner mandatory field is checked.
-- Mailing contacts smart button in partner form.
+- Name, email, company, country and tags of linked contacts are kept in
+  sync with their partner.
 - Mass mailing stats smart button in partner form.
 - Filter and group by partner in mail statistics tree view
 
@@ -59,9 +60,9 @@ res_id.
 Usage
 =====
 
-In partner view, there is a new action called "Add to mailing list".
-This action open a pop-up to select a mailing list. Selected partners
-will be added as mailing list contacts.
+In partner view, use the standard "Add to Mailing List" action to add
+the selected partners to mailing lists. Their linked mailing contacts
+are reused, or new contacts linked to the partners are created.
 
 Bug Tracker
 ===========
@@ -69,7 +70,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/mass-mailing/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/mass-mailing/issues/new?body=module:%20mass_mailing_partner%0Aversion:%2019.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/mass-mailing/issues/new?body=module:%20mass_mailing_partner%0Aversion:%2020.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -120,6 +121,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/mass-mailing <https://github.com/OCA/mass-mailing/tree/19.0/mass_mailing_partner>`_ project on GitHub.
+This module is part of the `OCA/mass-mailing <https://github.com/OCA/mass-mailing/tree/20.0/mass_mailing_partner>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

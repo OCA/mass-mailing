@@ -1,3 +1,3 @@
-In partner view, there is a new action called "Add to mailing list".
-This action open a pop-up to select a mailing list. Selected partners
-will be added as mailing list contacts.
+In partner view, use the standard "Add to Mailing List" action to add
+the selected partners to mailing lists. Their linked mailing contacts
+are reused, or new contacts linked to the partners are created.
