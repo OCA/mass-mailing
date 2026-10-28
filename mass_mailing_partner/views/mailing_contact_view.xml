@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!-- Copyright 2015 Pedro M. Baeza <pedro.baeza@tecnativa.com>
      Copyright 2015 Antonio Espinosa <antonio.espinosa@tecnativa.com>
      Copyright 2015 Javier Iniesta <javieria@antiun.com>
@@ -6,7 +6,7 @@
      Copyright 2020 Tecnativa - Manuel Calero
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
 <odoo>
-    <record model="ir.ui.view" id="view_mail_mass_mailing_contact_tree">
+    <record id="view_mail_mass_mailing_contact_tree" model="ir.ui.view">
         <field name="name">mailing.contact.tree.inherit</field>
         <field name="model">mailing.contact</field>
         <field name="inherit_id" ref="mass_mailing.mailing_contact_view_tree" />
@@ -17,7 +17,7 @@
         </field>
     </record>
 
-    <record model="ir.ui.view" id="view_mail_mass_mailing_contact_form">
+    <record id="view_mail_mass_mailing_contact_form" model="ir.ui.view">
         <field name="name">mailing.contact.form.partner</field>
         <field name="model">mailing.contact</field>
         <field name="inherit_id" ref="mass_mailing.mailing_contact_view_form" />
@@ -43,7 +43,7 @@
         </field>
     </record>
 
-    <record model="ir.ui.view" id="mailing_contact_view_form_split_name">
+    <record id="mailing_contact_view_form_split_name" model="ir.ui.view">
         <field name="name">Mailing partner makes first and last names readonly</field>
         <field name="model">mailing.contact</field>
         <field
@@ -60,7 +60,7 @@
         </field>
     </record>
 
-    <record model="ir.ui.view" id="view_mail_mass_mailing_contact_search">
+    <record id="view_mail_mass_mailing_contact_search" model="ir.ui.view">
         <field name="name">Add partner search field and group by</field>
         <field name="model">mailing.contact</field>
         <field name="inherit_id" ref="mass_mailing.mailing_contact_view_search" />
