@@ -12,9 +12,7 @@ from odoo import api, fields, models
 class MailingContact(models.Model):
     _inherit = "mailing.contact"
 
-    partner_id = fields.Many2one(
-        comodel_name="res.partner", domain=[("email", "!=", False)]
-    )
+    partner_id = fields.Many2one(domain=[("email", "!=", False)])
     tag_ids = fields.Many2many(compute="_compute_tag_ids", store=True)
 
     @api.depends("partner_id", "partner_id.category_id")
@@ -30,9 +28,7 @@ class MailingContact(models.Model):
         if self.partner_id:
             self.name = self.partner_id.name
             self.email = self.partner_id.email
-            self.company_name = (
-                self.partner_id.company_id.name or self.partner_id.company_name
-            )
+            self.company_name = self.partner_id.parent_id.name
             self.country_id = self.partner_id.country_id
 
     def _overwrite_partner(self, vals, creating=False):
@@ -60,7 +56,7 @@ class MailingContact(models.Model):
             partner = self.env["res.partner"].browse(vals["partner_id"])
             vals["name"] = partner.name
             vals["email"] = partner.email
-            vals["company_name"] = partner.company_id.name or partner.company_name
+            vals["company_name"] = partner.parent_id.name
             vals["country_id"] = partner.country_id.id
         result = super().write(vals)
         for contact in self:
@@ -80,7 +76,6 @@ class MailingContact(models.Model):
             "name": self.name or self.email,
             "email": self.email,
             "country_id": self.country_id.id,
-            "company_name": self.company_name,
             "company_id": False,
             "category_id": self._get_categories(),
         }

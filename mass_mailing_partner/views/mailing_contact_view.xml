@@ -11,8 +11,8 @@
         <field name="model">mailing.contact</field>
         <field name="inherit_id" ref="mass_mailing.mailing_contact_view_tree" />
         <field name="arch" type="xml">
-            <field name="email" position="after">
-                <field name="partner_id" />
+            <field name="partner_id" position="attributes">
+                <attribute name="optional">show</attribute>
             </field>
         </field>
     </record>
@@ -22,9 +22,6 @@
         <field name="model">mailing.contact</field>
         <field name="inherit_id" ref="mass_mailing.mailing_contact_view_form" />
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='email']/.." position="after">
-                <field name="partner_id" />
-            </xpath>
             <field name="email" position="attributes">
                 <attribute name="readonly">partner_id</attribute>
             </field>
@@ -65,9 +62,6 @@
         <field name="model">mailing.contact</field>
         <field name="inherit_id" ref="mass_mailing.mailing_contact_view_search" />
         <field name="arch" type="xml">
-            <field name="name" position="after">
-                <field name="partner_id" />
-            </field>
             <filter name="group_create_date" position="after">
                 <filter
                     string="Partner"

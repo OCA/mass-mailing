@@ -18,7 +18,7 @@ class ResPartnerCase(base.BaseCase):
         self.create_mailing_contact(
             {"email": "partner@test.com", "list_ids": [[6, 0, [self.mailing_list2.id]]]}
         )
-        self.assertEqual(self.partner.mass_mailing_contacts_count, 2)
+        self.assertEqual(len(self.partner.mailing_contact_ids), 2)
 
     def test_write_res_partner(self):
         contact = self.create_mailing_contact(
@@ -33,11 +33,12 @@ class ResPartnerCase(base.BaseCase):
         category_11 = self.env["res.partner.category"].create(
             {"name": "Test Category 11"}
         )
+        parent = self.create_partner({"name": "Parent company", "is_company": True})
         self.partner.write(
             {
                 "name": "Changed",
                 "email": "partner@changed.com",
-                "company_id": self.main_company.id,
+                "parent_id": parent.id,
                 "country_id": country_cu.id,
                 "category_id": [(6, 0, (category_8 | category_11).ids)],
             }

@@ -21,7 +21,7 @@ class MailMassMailingContactCase(base.BaseCase):
                 "email": "partner1@test.com",
             }
         )
-        self.assertFalse(partner_1.mass_mailing_contact_ids)
+        self.assertFalse(partner_1.mailing_contact_ids)
         partner_2 = self.env["res.partner"].create(
             {
                 "name": "Test partner 2",
@@ -29,7 +29,7 @@ class MailMassMailingContactCase(base.BaseCase):
             }
         )
 
-        self.assertFalse(partner_2.mass_mailing_contact_ids)
+        self.assertFalse(partner_2.mailing_contact_ids)
         contact_1 = self.env["mailing.contact"].create(
             {
                 "email": partner_1.email,
@@ -37,7 +37,7 @@ class MailMassMailingContactCase(base.BaseCase):
                 "list_ids": [Command.set(self.mailing_list.ids)],
             }
         )
-        self.assertEqual(contact_1, partner_1.mass_mailing_contact_ids)
+        self.assertEqual(contact_1, partner_1.mailing_contact_ids)
         contact_2 = self.env["mailing.contact"].create(
             {
                 "email": partner_2.email,
@@ -45,7 +45,7 @@ class MailMassMailingContactCase(base.BaseCase):
                 "list_ids": [Command.set(self.mailing_list.ids)],
             }
         )
-        self.assertEqual(contact_2, partner_2.mass_mailing_contact_ids)
+        self.assertEqual(contact_2, partner_2.mailing_contact_ids)
         partner_2.write({"email": "partner1@test.com"})
         self.assertEqual(contact_2.email, "partner1@test.com")
         contact_2.write({"list_ids": [Command.link(self.mailing_list2.id)]})
