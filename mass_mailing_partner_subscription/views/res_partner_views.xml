@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 ForgeFlow S.L. (https://www.forgeflow.com)
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="view_partner_form_mailing_list">
+        <field name="name">res.partner.form.mailing.list</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='internal_notes']" position="before">
+                <page
+                    string="Mailing Lists"
+                    name="mailing_lists"
+                    groups="mass_mailing.group_mass_mailing_user"
+                >
+                    <field name="mailing_list_ids" nolabel="1">
+                        <list>
+                            <field name="name" />
+                            <field name="create_date" />
+                            <field name="contact_count" string="Contacts" />
+                            <field name="is_public" />
+                            <field name="active" />
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
