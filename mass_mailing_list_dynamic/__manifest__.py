@@ -5,7 +5,7 @@
 {
     "name": "Dynamic Mass Mailing Lists",
     "summary": "Mass mailing lists that get autopopulated",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Marketing",
     "website": "https://github.com/OCA/mass-mailing",
     "author": "Tecnativa, Odoo Community Association (OCA)",
@@ -14,7 +14,7 @@
     "installable": True,
     "depends": ["mass_mailing_partner"],
     "data": [
-        "security/ir.model.access.csv",
+        "security/ir_access.xml",
         # This should go before "mailing_list_view.xml"
         "wizards/mailing_load_filter_views.xml",
         "views/mailing_list_view.xml",

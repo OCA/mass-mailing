@@ -12,6 +12,16 @@ from odoo.addons.base.tests.common import BaseCommon
 
 @tagged("post_install", "-at_install")
 class DynamicListCase(BaseCommon):
+    _test_user_groups = None
+
+    @classmethod
+    def get_default_groups(cls):
+        return (
+            super().get_default_groups()
+            + cls.env.ref("mass_mailing.group_mass_mailing_user")
+            + cls.env.ref("base.group_partner_manager")
+        )
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -35,7 +45,6 @@ class DynamicListCase(BaseCommon):
         )
         cls.mail = cls.env["mailing.mailing"].create(
             {
-                "name": "test mass mailing",
                 "subject": "test mass mailing",
                 "contact_list_ids": [(4, cls.list.id, False)],
             }

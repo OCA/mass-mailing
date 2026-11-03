@@ -9,5 +9,4 @@ class ResPartner(models.Model):
 
     def write(self, vals):
         """Allow to write values in mass mailing contact."""
-        self = self.with_context(syncing=True)
-        return super().write(vals)
+        return super(ResPartner, self.with_context(syncing=True)).write(vals)
