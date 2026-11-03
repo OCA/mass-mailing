@@ -25,7 +25,7 @@
                 </div>
             </header>
             <div name="button_box" position="attributes">
-                <attribute name="invisible">sent == 0</attribute>
+                <attribute name="invisible">is_template or sent == 0</attribute>
             </div>
         </field>
     </record>

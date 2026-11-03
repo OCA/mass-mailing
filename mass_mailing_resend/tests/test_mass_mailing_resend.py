@@ -10,6 +10,11 @@ from odoo.addons.base.tests.common import BaseCommon
 
 @tagged("post_install", "-at_install")
 class DynamicListCase(BaseCommon):
+    _test_user_groups = (
+        "base.group_user",
+        "mass_mailing.group_mass_mailing_user",
+    )
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -30,14 +35,12 @@ class DynamicListCase(BaseCommon):
         )
         cls.mass_mailing = cls.env["mailing.mailing"].create(
             {
-                "name": "Test mass mailing",
                 "email_from": "test@example.org",
                 "mailing_model_id": cls.env.ref("mass_mailing.model_mailing_list").id,
                 "contact_list_ids": [Command.set(cls.list.ids)],
                 "subject": "Mailing test",
             }
         )
-        cls.mm_cron = cls.env.ref("mass_mailing.ir_cron_mass_mailing_queue").sudo()
 
     def test_resend_error(self):
         with self.assertRaises(exceptions.UserError):
@@ -45,8 +48,10 @@ class DynamicListCase(BaseCommon):
 
     def _mailing_action_done(self):
         self.mass_mailing.action_launch()
-        with self.enter_registry_test_mode():
-            self.mm_cron.method_direct_trigger()
+        with self.registry_test_mode():
+            self.env.ref(
+                "mass_mailing.ir_cron_mass_mailing_queue"
+            ).sudo().method_direct_trigger()
 
     def test_resend_process(self):
         # Send mailing
