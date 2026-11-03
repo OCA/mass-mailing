@@ -52,7 +52,7 @@ class MassMailingList(models.Model):
             # Add new contacts
             current_partners = final_contacts.mapped("partner_id")
             for partner in desired_partners - current_partners:
-                final_contacts |= partner.mass_mailing_contact_ids[:1] or self.env[
+                final_contacts |= partner.mailing_contact_ids[:1] or self.env[
                     "mailing.contact"
                 ].new({"partner_id": partner.id})
             detached |= one.contact_ids - final_contacts
