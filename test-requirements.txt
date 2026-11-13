@@ -1,0 +1,1 @@
+odoo-addon-mass_mailing_partner @ git+https://github.com/OCA/mass-mailing.git@refs/pull/37/head#subdirectory=mass_mailing_partner
