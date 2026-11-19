@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_partner_form_tracking_consent" model="ir.ui.view">
+        <field name="name">res.partner.view.form.tracking.consent</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/notebook" position="inside">
+                <page
+                    string="Email Tracking"
+                    name="mailing_tracking"
+                    groups="mass_mailing.group_mass_mailing_user"
+                >
+                    <group>
+                        <field name="tracking_consent_id" invisible="1" />
+                        <field name="tracking_consent" />
+                        <button
+                            name="action_open_tracking_consent"
+                            type="object"
+                            string="Open Consent Record"
+                            class="btn-link"
+                            icon="oi-arrow-right"
+                        />
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_mail_mass_mailing_form_tracking_consent" model="ir.ui.view">
+        <field name="name">mailing.mailing.view.form.tracking.consent</field>
+        <field name="model">mailing.mailing</field>
+        <field name="inherit_id" ref="mass_mailing.view_mail_mass_mailing_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page
+                    string="Tracking Privacy"
+                    name="tracking_privacy"
+                    invisible="mailing_type != 'mail'"
+                >
+                    <group>
+                        <field name="tracking_policy" widget="radio" />
+                        <field
+                            name="tracking_consent_footer"
+                            invisible="tracking_policy != 'consent'"
+                        />
+                    </group>
+                    <div
+                        class="alert alert-warning"
+                        role="status"
+                        invisible="tracking_policy != 'always'"
+                    >
+                        Use this policy only for communications covered by a
+                        legal exemption of the Garante guidelines. The
+                        exemption must be assessed by the data controller.
+                    </div>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

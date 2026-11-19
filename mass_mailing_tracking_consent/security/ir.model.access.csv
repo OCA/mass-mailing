@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_mailing_tracking_consent_user,access.mailing.tracking.consent.user,model_mailing_tracking_consent,mass_mailing.group_mass_mailing_user,1,1,1,0
+access_mailing_tracking_consent_system,access.mailing.tracking.consent.system,model_mailing_tracking_consent,base.group_system,1,1,1,1
