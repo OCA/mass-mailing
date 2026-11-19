@@ -57,11 +57,13 @@ class BaseCase(TransactionCase):
         if mailing_contact.partner_id:
             self.assertEqual(mailing_contact.partner_id.email, mailing_contact.email)
             self.assertEqual(mailing_contact.partner_id.name, mailing_contact.name)
-            if mailing_contact.partner_id.company_id:
-                self.assertEqual(
-                    mailing_contact.partner_id.company_id.name,
-                    mailing_contact.company_name,
-                )
+            expected_company_name = (
+                mailing_contact.partner_id.parent_id.name
+                or mailing_contact.partner_id.company_name
+                or mailing_contact.partner_id.commercial_company_name
+                or False
+            )
+            self.assertEqual(expected_company_name, mailing_contact.company_name)
             self.assertEqual(
                 mailing_contact.partner_id.country_id, mailing_contact.country_id
             )
