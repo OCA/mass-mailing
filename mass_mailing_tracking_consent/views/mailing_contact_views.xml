@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="mailing_contact_view_search_tracking_consent" model="ir.ui.view">
+        <field name="name">mailing.contact.view.search.tracking.consent</field>
+        <field name="model">mailing.contact</field>
+        <field name="inherit_id" ref="mass_mailing.mailing_contact_view_search" />
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='filter_not_optout']" position="after">
+                <separator />
+                <filter
+                    name="filter_tracking_consent_granted"
+                    string="Tracking Consent Given"
+                    domain="[('tracking_consent', '=', 'granted')]"
+                />
+                <filter
+                    name="filter_tracking_consent_refused"
+                    string="Tracking Consent Refused"
+                    domain="[('tracking_consent', '=', 'refused')]"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="mailing_contact_view_form_tracking_consent" model="ir.ui.view">
+        <field name="name">mailing.contact.view.form.tracking.consent</field>
+        <field name="model">mailing.contact</field>
+        <field name="inherit_id" ref="mass_mailing.mailing_contact_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='email_details']" position="after">
+                <field name="tracking_consent_id" invisible="1" />
+                <div
+                    class="o_row"
+                    name="tracking_consent_row"
+                    invisible="not email"
+                    groups="mass_mailing.group_mass_mailing_user"
+                >
+                    <span>Tracking Consent:</span>
+                    <field name="tracking_consent" nolabel="1" />
+                    <button
+                        name="action_open_tracking_consent"
+                        type="object"
+                        string="Manage"
+                        class="btn-link"
+                        icon="oi-arrow-right"
+                    />
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

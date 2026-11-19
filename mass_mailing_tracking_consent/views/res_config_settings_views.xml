@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.tracking.consent</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="mass_mailing.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//app[@name='mass_mailing']" position="inside">
+                <block
+                    title="Tracking Pixels"
+                    name="mass_mailing_tracking_consent_settings"
+                >
+                    <setting
+                        name="mass_mailing_tracking_policy_setting"
+                        title="Default open/click tracking policy for new mailings. Change it on a single mailing when it falls under a legal exemption."
+                        help="Default tracking policy"
+                    >
+                        <field name="mass_mailing_tracking_policy" />
+                    </setting>
+                    <setting
+                        name="mass_mailing_tracking_consent_footer_setting"
+                        title="Default for new mailings: add a link to the public page where recipients can give or withdraw their tracking consent."
+                        help="Add tracking preferences link by default"
+                    >
+                        <field name="mass_mailing_tracking_consent_footer" />
+                    </setting>
+                </block>
+            </xpath>
+        </field>
+    </record>
+</odoo>

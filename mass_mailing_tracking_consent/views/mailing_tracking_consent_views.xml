@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="mailing_tracking_consent_view_search" model="ir.ui.view">
+        <field name="name">mailing.tracking.consent.view.search</field>
+        <field name="model">mailing.tracking.consent</field>
+        <field name="arch" type="xml">
+            <search string="Tracking Consents">
+                <field name="email" />
+                <field name="email_normalized" />
+                <separator />
+                <filter
+                    name="filter_granted"
+                    string="Granted"
+                    domain="[('state', '=', 'granted')]"
+                />
+                <filter
+                    name="filter_refused"
+                    string="Refused"
+                    domain="[('state', '=', 'refused')]"
+                />
+                <separator />
+                <filter
+                    name="filter_source_backend"
+                    string="Created in Backend"
+                    domain="[('source', '=', 'backend')]"
+                />
+                <filter
+                    name="filter_source_email"
+                    string="Updated from Email"
+                    domain="[('source', '=', 'email')]"
+                />
+                <group>
+                    <filter
+                        name="group_state"
+                        string="Status"
+                        context="{'group_by': 'state'}"
+                    />
+                    <filter
+                        name="group_source"
+                        string="Source"
+                        context="{'group_by': 'source'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="mailing_tracking_consent_view_list" model="ir.ui.view">
+        <field name="name">mailing.tracking.consent.view.list</field>
+        <field name="model">mailing.tracking.consent</field>
+        <field name="arch" type="xml">
+            <list string="Tracking Consents" sample="1">
+                <field name="email" />
+                <field
+                    name="state"
+                    widget="badge"
+                    decoration-success="state == 'granted'"
+                    decoration-danger="state == 'refused'"
+                />
+                <field name="consent_date" optional="show" />
+                <field name="source" optional="show" />
+                <field name="source_details" optional="hide" />
+            </list>
+        </field>
+    </record>
+
+    <record id="mailing_tracking_consent_view_form" model="ir.ui.view">
+        <field name="name">mailing.tracking.consent.view.form</field>
+        <field name="model">mailing.tracking.consent</field>
+        <field name="arch" type="xml">
+            <form string="Tracking Consent">
+                <header>
+                    <button
+                        name="action_grant"
+                        string="Grant Consent"
+                        type="object"
+                        class="btn-primary"
+                        invisible="state == 'granted'"
+                    />
+                    <button
+                        name="action_refuse"
+                        string="Withdraw Consent"
+                        type="object"
+                        invisible="state == 'refused'"
+                    />
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="email" widget="email" />
+                            <field name="email_normalized" invisible="1" />
+                            <field name="state" />
+                            <field name="consent_date" />
+                        </group>
+                        <group>
+                            <field name="source" />
+                            <field name="source_details" />
+                            <field name="mailing_id" />
+                        </group>
+                    </group>
+                    <field name="note" placeholder="Notes" />
+                </sheet>
+                <chatter />
+            </form>
+        </field>
+    </record>
+
+    <record id="mailing_tracking_consent_action" model="ir.actions.act_window">
+        <field name="name">Tracking Consents</field>
+        <field name="res_model">mailing.tracking.consent</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="mailing_tracking_consent_view_search" />
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Add a tracking consent
+            </p>
+            <p>
+                Record whether a recipient granted or refused the use of
+                tracking pixels and tracked links. Without a granted consent,
+                mass mailings are sent without them.
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+        id="mailing_tracking_consent_menu"
+        name="Tracking Consents"
+        parent="mass_mailing.mass_mailing_configuration"
+        action="mailing_tracking_consent_action"
+        sequence="25"
+        groups="mass_mailing.group_mass_mailing_user"
+    />
+</odoo>

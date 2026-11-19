@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="page_tracking_consent" name="Tracking Preferences">
+        <t t-call="mass_mailing.layout">
+            <div class="container o_mailing_tracking_consent">
+                <div class="row">
+                    <div class="col-lg-6 offset-lg-3 mt-4">
+                        <h1 class="o_page_header">Email tracking preferences</h1>
+                        <p>
+                            We use a small image, called a tracking pixel, to
+                            know whether you opened our emails. We only do so
+                            if you allowed it. You can change your choice at
+                            any time: stopping tracking does not stop the
+                            emails, which will be sent without the tracking
+                            pixel.
+                        </p>
+                        <div class="alert alert-success" t-if="saved">
+                            Your preference has been saved.
+                        </div>
+                        <div class="alert alert-info" t-if="consent_state == 'granted'">
+                            Tracking is currently enabled for
+                            <strong t-out="email" />.
+                        </div>
+                        <div
+                            class="alert alert-warning"
+                            t-elif="consent_state == 'refused'"
+                        >
+                            Tracking is currently disabled for
+                            <strong t-out="email" />.
+                        </div>
+                        <div class="alert alert-secondary" t-else="">
+                            No tracking choice has been recorded for
+                            <strong t-out="email" />, so tracking is disabled.
+                        </div>
+                        <form t-att-action="action_url" method="POST" class="mt-3">
+                            <input
+                                type="hidden"
+                                name="csrf_token"
+                                t-att-value="request.csrf_token()"
+                            />
+                            <button
+                                type="submit"
+                                name="consent_state"
+                                value="refused"
+                                class="btn btn-primary"
+                                t-if="consent_state != 'refused'"
+                            >
+                                Stop tracking only
+                            </button>
+                            <button
+                                type="submit"
+                                name="consent_state"
+                                value="granted"
+                                class="btn btn-secondary"
+                                t-if="consent_state != 'granted'"
+                            >
+                                Allow tracking
+                            </button>
+                        </form>
+                        <p t-if="unsubscribe_url" class="mt-4">
+                            <a t-att-href="unsubscribe_url">
+                                Unsubscribe from all emails
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>
