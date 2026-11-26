@@ -56,7 +56,7 @@ class MailingContact(models.Model):
     def write(self, vals):
         # If partner_id is changing, sync dependent fields from partner
         # to ensure consistency
-        if "partner_id" in vals and vals["partner_id"]:
+        if vals.get("partner_id"):
             partner = self.env["res.partner"].browse(vals["partner_id"])
             vals["name"] = partner.name
             vals["email"] = partner.email
