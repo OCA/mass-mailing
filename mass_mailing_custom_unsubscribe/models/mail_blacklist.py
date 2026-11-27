@@ -14,7 +14,7 @@ class MailBlackList(models.Model):
     def _get_metadata_message(self, message):
         if message and self.env.context.get("metadata"):
             return Markup(
-                f"{str(message)}<br/><br/><strong>METADATA</strong><hr/>"
+                f"{message!s}<br/><br/><strong>METADATA</strong><hr/>"
                 f"<pre>{self.env.context.get('metadata')}</pre>"
             )
 
