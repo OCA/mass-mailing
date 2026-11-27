@@ -10,6 +10,7 @@ registry
                 content: "Confirm unsubscribe",
                 trigger: "button:contains('Unsubscribe')",
                 run: "click",
+                expectUnloadPage: true,
             },
             {
                 content: "Confirm unsubscribe",
@@ -19,6 +20,7 @@ registry
                 content: "Confirm unsubscribe",
                 trigger: "a:contains('Manage Subscriptions')",
                 run: "click",
+                expectUnloadPage: true,
             },
             {
                 content: "Choose 'Other' reason",

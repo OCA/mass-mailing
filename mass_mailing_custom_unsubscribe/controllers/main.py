@@ -5,7 +5,6 @@
 # Copyright 2025 Moduon Team
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo.http import request, route
-from odoo.tools.misc import str2bool
 
 from odoo.addons.mass_mailing.controllers.main import MassMailController
 
@@ -16,10 +15,10 @@ class CustomUnsubscribe(MassMailController):
         self, mailing_id, document_id=None, email=None, hash_token=None
     ):
         """Redirect to the unsubscribe page if the redirect option is enabled."""
-        if str2bool(
+        if (
             request.env["ir.config_parameter"]
             .sudo()
-            .get_param("mass_mailing.mailing_lists_unsubscribe_redirect", "0")
+            .get_bool("mass_mailing.mailing_lists_unsubscribe_redirect")
         ):
             # Redirect to mailing_unsubscribe() route
             return request.redirect(
